@@ -36,6 +36,26 @@ $("#myForm").submit(function(event) {
       console.log(stars);
       $.get(stars, function(datastars,status){
         console.log("Estrellas: "+datastars.length);
+        $('#table-user').html(
+          `<thead>
+          <tr>
+            <th>Photo</th>
+            <th>User</th>
+            <th>Followers</th>
+            <th>Following</th>
+            <th>Starts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="${data.avatar_url}" class="logo"></td>
+            <td> ${data.login} </td>
+            <td> ${data.followers} </td>
+            <td> ${data.following} </td>
+            <td> ${datastars.length}</td>
+          <tr>
+        </tbody>`
+          )
       })
     })
 });
