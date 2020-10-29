@@ -1,74 +1,35 @@
 const url = "https://api.github.com/users/";
-//const user ="Pochu15"
-//const sub = url.length+user.length;
-//console.log(url+user,"sub "+sub);
-
-/*$(function(){
-  $("#user").click(function(){
-    console.log(document.querySelector("#user").value);
-    $.get(url+user, function(data,status){
-      console.log(data.login)
-      console.log(data.avatar_url)
-      console.log(data.followers)
-      console.log(data.following)
-      console.log(data.starred_url)
-      let stars = data.starred_url.substring(-1, url.length+user.length+8);
-      console.log(stars);
-      $.get(stars, function(datastars,status){
-        console.log(datastars.length);
-      })
-    })
-  });
-});*/
 
 var user;
 $("#myForm").submit(function(event) {
     event.preventDefault();
     user= $(this).find('input[name="user"]').val();
-    console.log(user);
     $.get(url+user, function(data,status){
-      console.log(data.login)
-      console.log(data.avatar_url)
-      console.log(data.followers)
-      console.log(data.following)
-      console.log(data.starred_url)
       let stars = data.starred_url.substring(-1, url.length+user.length+8);
-      console.log(stars);
+      let lastconnection = data.updated_at.substring(-1,10)+" "+data.updated_at.substring(11,19);
       $.get(stars, function(datastars,status){
-        console.log("Estrellas: "+datastars.length);
         $('#table-user').html(
           `<thead>
           <tr>
             <th>Photo</th>
-            <th>User</th>
+            <th>Name</th>
+            <th>Last Connectio</th>
             <th>Followers</th>
             <th>Following</th>
-            <th>Starts</th>
+            <th>Stars Gived</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><img src="${data.avatar_url}" class="logo"></td>
-            <td> ${data.login} </td>
+            <td> ${data.name} </td>
+            <td> ${lastconnection}</td>
             <td> ${data.followers} </td>
             <td> ${data.following} </td>
-            <td> ${datastars.length}</td>
+            <td> ${datastars.length} <i class="far fa-star"></i> </td>
           <tr>
         </tbody>`
           )
       })
     })
 });
-
-
-/*
-https://api.github.com/users/Pochu15
-Following
-https://api.github.com/users/Pochu15/following
-Followers
-https://api.github.com/users/Pochu15/followers
-Avatar
-avatar_url,
-Stars, del 0 al 7 
-https://api.github.com/users/Pochu15/starred
-*/
