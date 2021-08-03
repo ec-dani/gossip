@@ -1,5 +1,5 @@
 # GossipHub 
-_👉 https://ec-dani.github.io/gossipHub/ _
+_👉 https://ec-dani.github.io/gossipHub/_
 Web using the GitHub API
 
 ## Description
